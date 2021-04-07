@@ -48,4 +48,25 @@ describe('Thermostat Interactions', function() {
         cy.get('#on').click()
         cy.contains('activated')
     })
+
+    it('can only go up to 25 when PSM is activated', function(){
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.contains(25)
+    })
+
+    it('can only go up to 26 when PSM is deactivated', function(){
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.contains(26)
+    })
 })
