@@ -1,15 +1,15 @@
 export class Thermostat{
-  constructor(ps = 'on', temperature = 20, min = 10){
+  constructor(ps = 'activated', temperature = 20, min = 10){
     this.temperature = temperature;
     this.minimum = min;
     this.powerSaving = ps;
   }
   powerSav(){
-    if(this.powerSaving === 'on'){
+    if(this.powerSaving === 'activated'){
       this.max = 25;
       return this.max;
     }
-    else if(this.powerSaving === 'off'){
+    else if(this.powerSaving === 'deactivated'){
       this.max = 32;
       return this.max;
     }

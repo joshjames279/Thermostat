@@ -4,7 +4,8 @@
   "description": "![](./images/thermostat-styled.png)",
   "main": "app.js",
   "dependencies": {
-    "cypress": "^7.0.0"
+    "cypress": "^7.0.0",
+    "http-server": "^0.12.3"
   },
   "devDependencies": {
     "eslint": "^7.23.0",
