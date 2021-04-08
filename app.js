@@ -1,7 +1,8 @@
 import {Thermostat} from "./src/thermostat.js";
 
+window.onload = function(){
+
 const thermostat = new Thermostat();
-console.log(thermostat)
 
 const thermoTemp = document.getElementById("Temp");
 const upB = document.getElementById("up")
@@ -12,27 +13,26 @@ const psm = document.getElementById("psm")
 const offB = document.getElementById("off")
 
 thermoTemp.innerHTML = thermostat.temperature
+psm.innerHTML = `PSM:${thermostat.powerSaving}`
 
-upB.addEventListener('click', function() {
+$(upB).click(function() {
     thermoTemp.innerHTML = thermostat.up()
 })
 
-downB.addEventListener('click', function() {
+$(downB).click(function() {
     thermoTemp.innerHTML = thermostat.down()
 })
 
-resetB.addEventListener('click', function() {
+$(resetB).click(function() {
     thermoTemp.innerHTML = thermostat.reset()
 })
 
-    psm.innerHTML = `PSM:${thermostat.powerSaving}`
-
-offB.addEventListener('click', function() {
+$(offB).click(function() {
     thermostat.powerSaving = 'off'
     psm.innerHTML = `PSM:${thermostat.powerSaving}`
 })
 
-onB.addEventListener('click', function() {
+$(onB).click(function() {
     if(thermostat.temperature > 25){
         thermostat.temperature = 25;
     }
@@ -40,3 +40,5 @@ onB.addEventListener('click', function() {
     psm.innerHTML = `PSM:${thermostat.powerSaving}`
     thermoTemp.innerHTML = thermostat.temperature
 })
+
+}
