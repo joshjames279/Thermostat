@@ -25,7 +25,7 @@ describe('Thermostat tests', () => {
 
       it('Minumum temperature is 10', () => {
 
-        const thermostat = new Thermostat('activated',12);
+        const thermostat = new Thermostat('on',12);
         thermostat.down()
         thermostat.down()
   
@@ -34,7 +34,7 @@ describe('Thermostat tests', () => {
 
       it('Max temp is 25 when PS on', () => {
 
-        const thermostat = new Thermostat('activated',23);
+        const thermostat = new Thermostat('on',23);
         thermostat.up()
         thermostat.up()
   
@@ -43,7 +43,7 @@ describe('Thermostat tests', () => {
 
       it('Max temp is 32 when PS off', () => {
 
-        const thermostat = new Thermostat('deactivated',30);
+        const thermostat = new Thermostat('off',30);
         thermostat.up()
         thermostat.up()
   
@@ -54,7 +54,7 @@ describe('Thermostat tests', () => {
 
         const thermostat = new Thermostat();
   
-        expect(thermostat.powerSaving).to.equal('activated')
+        expect(thermostat.powerSaving).to.equal('on')
       });
 
       it('Reset the temperature to 20', () => {
@@ -87,7 +87,7 @@ describe('Thermostat tests', () => {
 
       it('Check returns high-usage', () => {
 
-        const thermostat = new Thermostat('deactivated', 24);
+        const thermostat = new Thermostat('off', 24);
         thermostat.up()
         thermostat.up()
   

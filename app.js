@@ -28,11 +28,15 @@ resetB.addEventListener('click', function() {
     psm.innerHTML = `PSM:${thermostat.powerSaving}`
 
 offB.addEventListener('click', function() {
-    thermostat.powerSaving = 'deactivated'
+    thermostat.powerSaving = 'off'
     psm.innerHTML = `PSM:${thermostat.powerSaving}`
 })
 
 onB.addEventListener('click', function() {
-    thermostat.powerSaving = 'activated'
+    if(thermostat.temperature > 25){
+        thermostat.temperature = 25;
+    }
+    thermostat.powerSaving = 'on'
     psm.innerHTML = `PSM:${thermostat.powerSaving}`
+    thermoTemp.innerHTML = thermostat.temperature
 })

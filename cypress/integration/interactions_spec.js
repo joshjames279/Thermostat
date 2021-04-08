@@ -36,17 +36,17 @@ describe('Thermostat Interactions', function() {
     })
 
     it('shows PSM as initially activated', function(){
-        cy.contains('activated')
+        cy.contains('on')
     })
 
     it('shows PSM as deactivated', function(){
         cy.get('#off').click()
-        cy.contains('deactivated')
+        cy.contains('off')
     })
 
     it('shows PSM as activated', function(){
         cy.get('#on').click()
-        cy.contains('activated')
+        cy.contains('on')
     })
 
     it('can only go up to 25 when PSM is activated', function(){
@@ -68,5 +68,33 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.get('#up').click()
         cy.contains(26)
+    })
+
+    it('can only go up to 25 when PSM is reactivated', function(){
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#on').click()
+        cy.get('#up').click()
+        cy.contains(25)
+    })
+
+    it('can only go up to 25 when PSM is reactivated', function(){
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#on').click()
+        cy.get('#up').click()
+        cy.contains(25)
     })
 })
