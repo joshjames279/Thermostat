@@ -17,14 +17,33 @@ psm.innerHTML = `PSM:${thermostat.powerSaving}`
 
 $(upB).click(function() {
     thermoTemp.innerHTML = thermostat.up()
+    if(thermostat.usage() === 'low'){
+        $(thermoTemp).css("color", "green")
+        } 
+    if(thermostat.usage() === 'medium'){
+        $(thermoTemp).css("color", "black")
+    }     
+    if(thermostat.usage() === 'high'){
+        $(thermoTemp).css("color", "red")
+        } 
 })
 
 $(downB).click(function() {
     thermoTemp.innerHTML = thermostat.down()
+    if(thermostat.usage() === 'low'){
+        $(thermoTemp).css("color", "green")
+        } 
+    if(thermostat.usage() === 'medium'){
+        $(thermoTemp).css("color", "black")
+    }   
+    if(thermostat.usage() === 'high'){
+        $(thermoTemp).css("color", "red")
+        }     
 })
 
 $(resetB).click(function() {
     thermoTemp.innerHTML = thermostat.reset()
+    $(thermoTemp).css("color", "black")
 })
 
 $(offB).click(function() {
@@ -35,6 +54,12 @@ $(offB).click(function() {
 $(onB).click(function() {
     if(thermostat.temperature > 25){
         thermostat.temperature = 25;
+    }
+    if(thermostat.usage() === 'low'){
+        $(thermoTemp).css("color", "green")
+        } 
+    if(thermostat.usage() === 'medium'){
+        $(thermoTemp).css("color", "black")
     }
     thermostat.powerSaving = 'on'
     psm.innerHTML = `PSM:${thermostat.powerSaving}`

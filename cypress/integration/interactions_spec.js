@@ -97,4 +97,84 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.contains(25)
     })
+
+    it('temp should be in green for 17 degrees', () => {
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 128, 0)')
+      })
+
+    it('temp should be in red for 26 degrees', () => {
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(255, 0, 0)')
+      })
+
+      it('temp should be in black for 25 degrees', () => {
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#down').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 0, 0)')
+      })
+
+      it('temp should be in black for 18 degrees', () => {
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#up').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 0, 0)')
+      })
+
+      it('temp should be in black after reset', function(){
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#reset').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 0, 0)')
+    })
+
+    it('temp should be in black after reset', function(){
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#reset').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 0, 0)')
+    })
+
+    it('temp should be in black after PSM reactivated', () => {
+        cy.get('#off').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#up').click()
+        cy.get('#on').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 0, 0)')
+      })
+
+      it('temp should be in green after PSM reactivated', () => {
+        cy.get('#off').click()
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#down').click()
+        cy.get('#on').click()
+        cy.get('#Temp').should('have.css', 'color', 'rgb(0, 128, 0)')
+      })
+
 })
