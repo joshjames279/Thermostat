@@ -4,19 +4,19 @@ window.onload = function(){
 
 const thermostat = new Thermostat();
 
-const thermoTemp = document.getElementById("Temp");
-const upB = document.getElementById("up")
-const downB = document.getElementById("down")
-const resetB = document.getElementById("reset")
-const onB = document.getElementById("on")
-const psm = document.getElementById("psm")
-const offB = document.getElementById("off")
+const thermoTemp = $("#Temp")[0];
+const upB = $("#up")[0]
+const downB = $("#down")[0]
+const resetB = $("#reset")[0]
+const onB = $("#on")[0]
+const psm = $("#psm")[0]
+const offB = $("#off")[0]
 
-thermoTemp.innerHTML = thermostat.temperature
-psm.innerHTML = `PSM:${thermostat.powerSaving}`
+$(thermoTemp).html(thermostat.temperature)
+$(psm).html(`PSM:${thermostat.powerSaving}`)
 
 $(upB).click(function() {
-    thermoTemp.innerHTML = thermostat.up()
+    $(thermoTemp).html(thermostat.up())
     if(thermostat.usage() === 'low'){
         $(thermoTemp).css("color", "green")
         } 
@@ -29,7 +29,7 @@ $(upB).click(function() {
 })
 
 $(downB).click(function() {
-    thermoTemp.innerHTML = thermostat.down()
+    $(thermoTemp).html(thermostat.down())
     if(thermostat.usage() === 'low'){
         $(thermoTemp).css("color", "green")
         } 
@@ -42,13 +42,13 @@ $(downB).click(function() {
 })
 
 $(resetB).click(function() {
-    thermoTemp.innerHTML = thermostat.reset()
+    $(thermoTemp).html(thermostat.reset())
     $(thermoTemp).css("color", "black")
 })
 
 $(offB).click(function() {
     thermostat.powerSaving = 'off'
-    psm.innerHTML = `PSM:${thermostat.powerSaving}`
+    $(psm).html(`PSM:${thermostat.powerSaving}`)
 })
 
 $(onB).click(function() {
@@ -62,8 +62,8 @@ $(onB).click(function() {
         $(thermoTemp).css("color", "black")
     }
     thermostat.powerSaving = 'on'
-    psm.innerHTML = `PSM:${thermostat.powerSaving}`
-    thermoTemp.innerHTML = thermostat.temperature
+    $(psm).html(`PSM:${thermostat.powerSaving}`)
+    $(thermoTemp).html(thermostat.temperature)
 })
 
 }
