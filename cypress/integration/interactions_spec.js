@@ -178,3 +178,19 @@ describe('Thermostat Interactions', function() {
       })
 
 })
+
+describe('Weather display', function() {
+    beforeEach(function() {
+        cy.intercept('http://api.openweathermap.org/data/2.5/weather*', { fixture: 'weather-data.json' })
+        cy.visit('./thermostat.html')
+    })
+    it('shows temperature for London', function(){
+        cy.get('#CityTemp').contains(8)
+    })
+
+    it('shows temperature range for London', function(){
+        cy.get('#CityRange').contains(7)
+        cy.get('#CityRange').contains(9)
+    })
+
+})
