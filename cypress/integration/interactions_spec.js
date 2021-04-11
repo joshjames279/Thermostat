@@ -3,50 +3,50 @@ describe('Thermostat Interactions', function() {
         cy.visit('./thermostat.html')
     })
     it('shows 20 on the page', function(){
-        cy.contains(20)
+        cy.get('#Temp').contains(20)
     })
 
     it('shows 21 after up is pressed', function(){
         cy.get('#up').click()
-        cy.contains(21)
+        cy.get('#Temp').contains(21)
     })
 
     it('shows 22 after up is pressed twice', function(){
         cy.get('#up').click()
         cy.get('#up').click()
-        cy.contains(22)
+        cy.get('#Temp').contains(22)
     })
 
     it('shows 18 after down is pressed twice', function(){
         cy.get('#down').click()
         cy.get('#down').click()
-        cy.contains(18)
+        cy.get('#Temp').contains(18)
     })
 
     it('shows 19 after down is pressed once', function(){
         cy.get('#down').click()
-        cy.contains(19)
+        cy.get('#Temp').contains(19)
     })
 
     it('shows 20 after reset is pressed', function(){
         cy.get('#down').click()
         cy.get('#down').click()
         cy.get('#reset').click()
-        cy.contains(20)
+        cy.get('#Temp').contains(20)
     })
 
     it('shows PSM as initially activated', function(){
-        cy.contains('on')
+        cy.get('#psm').contains('on')
     })
 
     it('shows PSM as deactivated', function(){
         cy.get('#off').click()
-        cy.contains('off')
+        cy.get('#psm').contains('off')
     })
 
     it('shows PSM as activated', function(){
         cy.get('#on').click()
-        cy.contains('on')
+        cy.get('#psm').contains('on')
     })
 
     it('can only go up to 25 when PSM is activated', function(){
@@ -56,7 +56,7 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.get('#up').click()
         cy.get('#up').click()
-        cy.contains(25)
+        cy.get('#Temp').contains(25)
     })
 
     it('can only go up to 26 when PSM is deactivated', function(){
@@ -67,7 +67,7 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.get('#up').click()
         cy.get('#up').click()
-        cy.contains(26)
+        cy.get('#Temp').contains(26)
     })
 
     it('can only go up to 25 when PSM is reactivated', function(){
@@ -80,7 +80,7 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.get('#on').click()
         cy.get('#up').click()
-        cy.contains(25)
+        cy.get('#Temp').contains(25)
     })
 
     it('can only go up to 25 when PSM is reactivated', function(){
@@ -95,7 +95,7 @@ describe('Thermostat Interactions', function() {
         cy.get('#up').click()
         cy.get('#on').click()
         cy.get('#up').click()
-        cy.contains(25)
+        cy.get('#Temp').contains(25)
     })
 
     it('temp should be in green for 17 degrees', () => {
@@ -184,13 +184,24 @@ describe('Weather display', function() {
         cy.intercept('http://api.openweathermap.org/data/2.5/weather*', { fixture: 'weather-data.json' })
         cy.visit('./thermostat.html')
     })
+
     it('shows temperature for London', function(){
-        cy.get('#CityTemp').contains(8)
+        cy.get('#CityName').type('London')
+        cy.get('#SubmitButton').click()
+        cy.get('#CityTemp2').contains(8)
     })
 
-    it('shows temperature range for London', function(){
-        cy.get('#CityRange').contains(7)
-        cy.get('#CityRange').contains(9)
+})
+
+describe('Weather display failure', function() {
+    beforeEach(function() {
+        cy.visit('./thermostat.html')
     })
+
+it('shows error for Invalid city', function(){
+    cy.get('#CityName').type('Londo')
+    cy.get('#SubmitButton').click()
+    cy.get('#CityTemp2').contains('Invalid city')
+})
 
 })

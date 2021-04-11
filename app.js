@@ -1,5 +1,7 @@
 import {Thermostat} from "./src/thermostat.js";
 
+var mykey = config.MY_KEY
+
 window.onload = function(){
 
 const thermostat = new Thermostat();
@@ -11,8 +13,13 @@ const resetB = $("#reset")[0];
 const onB = $("#on")[0];
 const psm = $("#psm")[0];
 const offB = $("#off")[0];
-const cityTemp = $("#CityTemp")[0];
-const cityRange = $("#CityRange")[0]
+const submitButton = $("#SubmitButton")[0];
+const cityName = $("#CityName")[0];
+const cityTemp2 = $("#CityTemp2")[0];
+
+$(submitButton).ajaxError(function() {
+    alert("an error has occured");   
+});
 
 $(thermoTemp).html(`${thermostat.temperature}°C`);
 $(psm).html(`PSM:${thermostat.powerSaving}`);
@@ -68,10 +75,15 @@ $(onB).click(function() {
     $(thermoTemp).html(thermostat.temperature)
 });
 
-$.get('http://api.openweathermap.org/data/2.5/weather?q=London&appid=da74f2d377da060fee93b6ae36a01645&units=metric')
-.then(data => {
-    $(cityTemp).html(`${data.name},${data.sys.country} : ${Math.round(data.main.temp)}°C`)
-    $(cityRange).html(`High:${Math.round(data.main.temp_max)}°C Low:${Math.round(data.main.temp_min)}°C`)
-})
+$(submitButton).click( function() {
+    var url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${mykey}&units=metric`;
+    $.get(url)
+    .then(data => {
+    $(cityTemp2).html(`${data.name},${data.sys.country} : ${Math.round(data.main.temp)}°C`)
+    },
+    rejection => {
+        $(cityTemp2).html('Invalid city, please try again')
+    })
+});
 
 };
