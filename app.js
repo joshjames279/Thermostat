@@ -17,15 +17,11 @@ const submitButton = $("#SubmitButton")[0];
 const cityName = $("#CityName")[0];
 const cityTemp2 = $("#CityTemp2")[0];
 
-$(submitButton).ajaxError(function() {
-    alert("an error has occured");   
-});
-
 $(thermoTemp).html(`${thermostat.temperature}°C`);
 $(psm).html(`PSM:${thermostat.powerSaving}`);
 
 $(upB).click(function() {
-    $(thermoTemp).html(thermostat.up())
+    $(thermoTemp).html(`${thermostat.up()}°C`)
     if(thermostat.usage() === 'low'){
         $(thermoTemp).css("color", "green")
         } 
@@ -38,7 +34,7 @@ $(upB).click(function() {
 });
 
 $(downB).click(function() {
-    $(thermoTemp).html(thermostat.down())
+    $(thermoTemp).html(`${thermostat.down()}°C`)
     if(thermostat.usage() === 'low'){
         $(thermoTemp).css("color", "green")
         } 
@@ -51,7 +47,7 @@ $(downB).click(function() {
 });
 
 $(resetB).click(function() {
-    $(thermoTemp).html(thermostat.reset())
+    $(thermoTemp).html(`${thermostat.reset()}°C`)
     $(thermoTemp).css("color", "black")
 });
 
@@ -72,7 +68,7 @@ $(onB).click(function() {
     }
     thermostat.powerSaving = 'on'
     $(psm).html(`PSM:${thermostat.powerSaving}`)
-    $(thermoTemp).html(thermostat.temperature)
+    $(thermoTemp).html(`${thermostat.temperature}°C`)
 });
 
 $(submitButton).click( function() {
@@ -82,8 +78,9 @@ $(submitButton).click( function() {
     $(cityTemp2).html(`${data.name},${data.sys.country} : ${Math.round(data.main.temp)}°C`)
     },
     rejection => {
-        $(cityTemp2).html('Invalid city, please try again')
+        $(cityTemp2).html(`${rejection.responseJSON.message}, please try again.`)
     })
+    $(cityName).val('')
 });
 
 };

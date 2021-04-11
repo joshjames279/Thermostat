@@ -195,13 +195,19 @@ describe('Weather display', function() {
 
 describe('Weather display failure', function() {
     beforeEach(function() {
-        cy.visit('./thermostat.html')
+        cy.intercept({
+            headers: {
+              accept: 'application/json'
+            }
+          }, {
+            statusCode: 404
+          })
     })
 
-it('shows error for Invalid city', function(){
+    it('shows error for Invalid city', function(){
     cy.get('#CityName').type('Londo')
     cy.get('#SubmitButton').click()
-    cy.get('#CityTemp2').contains('Invalid city')
-})
+    cy.get('#CityTemp2')
+    })
 
 })
