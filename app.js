@@ -76,11 +76,11 @@ $(submitButton).click( function() {
     $.get(url)
     .then(data => {
     $(cityTemp2).html(`${data.name},${data.sys.country} : ${Math.round(data.main.temp)}°C`)
+    $(cityName).val('')
     },
     rejection => {
         $(cityTemp2).html(`${rejection.responseJSON.message}, please try again.`)
     })
-    $(cityName).val('')
 });
 
 };
